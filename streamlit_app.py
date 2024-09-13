@@ -86,6 +86,11 @@ def store_manager_app():
             "sql": "SELECT f.NetExVATUSDPlan FROM Fact_Store_Plan f JOIN dim_Location_Latest l ON f.LocationLatestKey = l.LocationLatestKey WHERE l.LatestLocation = 'THE PIKE OUTLETS';",
             "nlr": "The data table returned consists of a series of net margin values in USD for the store located at THE PIKE OUTLETS. The values are presented in a single column, with some margins appearing multiple times, indicating that there may be repeated entries for certain periods or transactions.\n\nThe margins range from as low as 0.0 to as high as 16700.54, suggesting a significant variation in performance. Notably, there are several entries with a value of 0.0, which may indicate periods of no profit or data not being recorded. The presence of multiple identical values, such as 10975.71 and 12232.21, could imply consistent performance during specific timeframes.\n\nOverall, this data provides a snapshot of the financial performance of the store, highlighting both profitable and unprofitable periods.",
         },
+        "What is the net sales on July 31, 2023 compared to the same period last year for latest location of store THE PIKE OUTLETS?":
+        {
+            "sql": "SELECT f.NetSaleLocal, f.NetSaleLocalLY FROM fact_Sale f JOIN dim_Calendar c ON f.CalendarKey = c.CalendarKey JOIN dim_Location_Latest l ON f.LocationLatestKey = l.LocationLatestKey WHERE l.LatestLocation = 'THE PIKE OUTLETS' AND c.CalendarDate = '2023-07-31';",
+            "nlr": "On July 31, 2023, the net sales for the latest location of the store THE PIKE OUTLETS were as follows: $65, $242.96, and $1197.18. In comparison, there were no net sales recorded for the same period last year."
+        },
     }
 
     if 'queries' not in st.session_state:
